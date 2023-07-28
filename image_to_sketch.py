@@ -86,7 +86,7 @@ input_path_label.grid(row=0, column=0, padx=10, pady=5)
 input_path_entry = tk.Entry(selection_frame, width=35)
 input_path_entry.grid(row=0, column=1, padx=10, pady=5)
 
-browse_input_button = tk.Button(selection_frame, text="Browse",bg='#828282', command=get_input_image_path, fg='#000000', width=7)
+browse_input_button = tk.Button(selection_frame, text="Browse",bg='#828282', command=get_input_image_path, fg='#000000', width=7, bd=1)
 browse_input_button.grid(row=0, column=2, padx=10, pady=5)
 
 output_path_label = tk.Label(selection_frame, text="Output Folder",bg='#828282', fg='#000000')
@@ -95,7 +95,7 @@ output_path_label.grid(row=1, column=0, padx=5, pady=5)
 output_path_entry = tk.Entry(selection_frame, width=35)
 output_path_entry.grid(row=1, column=1, padx=10, pady=5)
 
-browse_output_button = tk.Button(selection_frame, text="Browse", bg='#828282', command=get_output_folder, fg='#000000',width=7)
+browse_output_button = tk.Button(selection_frame, text="Browse", bg='#828282', command=get_output_folder, fg='#000000',width=7, bd=1)
 browse_output_button.grid(row=1, column=2, padx=10, pady=5)
 
 # Levels Frame
@@ -114,7 +114,7 @@ normal_radio.grid(row=0, column=1)
 medium_radio.grid(row=0, column=2)
 best_radio.grid(row=0, column=3)
 
-button = tk.Button(root, text="Generate", command=generate_sketch, width=10,bg='#828282', fg='#000000')
+button = tk.Button(root, text="Generate", command=generate_sketch, width=10,bg='#828282', fg='#000000', bd=1)
 button.pack(padx=10, pady=10)
 
 root.mainloop()
