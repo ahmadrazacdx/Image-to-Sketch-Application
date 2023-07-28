@@ -1,7 +1,6 @@
 # Image To Sketch by @ Ahmad Raza
 import os
 import cv2
-import webbrowser
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
