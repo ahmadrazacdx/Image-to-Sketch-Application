@@ -5,7 +5,6 @@ import webbrowser
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
-
 def is_valid_image_extension(filename):
     valid_extensions = ['.jpg', '.jpeg', '.png']
     return any(filename.lower().endswith(ext) for ext in valid_extensions)
@@ -16,7 +15,6 @@ def get_input_image_path():
         input_path_entry.insert(0, file_path)
     else:
         messagebox.showerror("Error", "Invalid image file selected!")
-
 def get_output_folder():
     folder_path = filedialog.askdirectory()
     if folder_path:
@@ -34,10 +32,10 @@ def pencil_sketch(input_image_path, output_folder_path, kernel_size=(11, 11), si
         inverted_blurred_image = 255 - blurred_image
         pencil_sketch = cv2.divide(gray_image, inverted_blurred_image, scale=256.0)
 
-        name=1
+        name = 1
         file_extension = os.path.splitext(input_image_path)[-1]
         output_sketch_path = os.path.join(output_folder_path, f"sketch_{str(name)}" + file_extension)
-        name+=1
+        name += 1
 
         cv2.imwrite(output_sketch_path, pencil_sketch)
         messagebox.showinfo("Success", "Pencil sketch saved as: " + output_sketch_path)
@@ -48,7 +46,6 @@ def pencil_sketch(input_image_path, output_folder_path, kernel_size=(11, 11), si
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
-
 def generate_sketch():
     input_image_path = input_path_entry.get()
     output_sketch_path = output_path_entry.get()
@@ -60,8 +57,8 @@ def generate_sketch():
             kernel_size = (11, 11)
         elif choice == 3:
             kernel_size = (17, 17)
-        elif choice ==4:
-            kernel_size =(21,21)
+        elif choice == 4:
+            kernel_size = (21, 21)
         else:
             raise ValueError("Invalid choice. Please select a valid option (1/2/3).")
         pencil_sketch(input_image_path, output_sketch_path, kernel_size=kernel_size)
@@ -70,14 +67,10 @@ def generate_sketch():
     except Exception as e:
         messagebox.showerror("Error", "An unexpected error occurred: " + str(e))
 
-def open_form():
-    form_url = "https://forms.gle/wx4MmnUWVfkfNrUs7"
-    webbrowser.open(form_url)
-
 root = tk.Tk()
 root.title("Sketch Generator")
-root.geometry('440x235')
-root.resizable(False,False)
+root.geometry('460x205')
+root.resizable(False, False)
 root.configure(bg='#828282')
 
 frame = tk.Frame(root,bg='#828282')
@@ -85,9 +78,9 @@ frame.pack()
 
 # Selection Frame
 selection_frame = tk.LabelFrame(frame, text="Selection",bg='#828282', fg='#000000')
-selection_frame.grid(row=0, column=0, padx=20, pady=5)
+selection_frame.grid(row=0, column=0, padx=20, pady=10)
 
-input_path_label = tk.Label(selection_frame, text="Input Image:",bg='#828282', fg='#000000')
+input_path_label = tk.Label(selection_frame, text="Input Image",bg='#828282', fg='#000000')
 input_path_label.grid(row=0, column=0, padx=10, pady=5)
 
 input_path_entry = tk.Entry(selection_frame, width=35)
@@ -96,41 +89,32 @@ input_path_entry.grid(row=0, column=1, padx=10, pady=5)
 browse_input_button = tk.Button(selection_frame, text="Browse",bg='#828282', command=get_input_image_path, fg='#000000', width=7)
 browse_input_button.grid(row=0, column=2, padx=10, pady=5)
 
-output_path_label = tk.Label(selection_frame, text="Output Folder:",bg='#828282', fg='#000000')
+output_path_label = tk.Label(selection_frame, text="Output Folder",bg='#828282', fg='#000000')
 output_path_label.grid(row=1, column=0, padx=5, pady=5)
 
 output_path_entry = tk.Entry(selection_frame, width=35)
 output_path_entry.grid(row=1, column=1, padx=10, pady=5)
 
-browse_output_button = tk.Button(selection_frame, text="Browse", bg='#828282', command=get_output_folder, fg='#000000', width=7)
+browse_output_button = tk.Button(selection_frame, text="Browse", bg='#828282', command=get_output_folder, fg='#000000',width=7)
 browse_output_button.grid(row=1, column=2, padx=10, pady=5)
 
 # Levels Frame
-level_frame = tk.LabelFrame(frame, text="Levels", bg='#828282',fg='#000000')
-level_frame.grid(row=1, column=0, padx=20, pady=10, sticky='ew')
+level_frame = tk.LabelFrame(frame, text="Levels", bg='#828282', fg='#000000')
+level_frame.grid(row=1, column=0, padx=20, pady=0, sticky='ew')
 
-choice_var = tk.StringVar()
-choice_var.set("2")
+choice_var = tk.IntVar()
+choice_var.set(2)
 
-small_radio = tk.Radiobutton(level_frame, text="Small",variable=choice_var, value="1", bg='#828282', fg='#000000')
-normal_radio = tk.Radiobutton(level_frame, text="Normal ", variable=choice_var, value="2", bg='#828282', fg='#000000')
-medium_radio = tk.Radiobutton(level_frame, text="Medium", variable=choice_var, value="3", bg='#828282', fg='#000000')
-best_radio = tk.Radiobutton(level_frame, text="Best", variable=choice_var, value="4", bg='#828282', fg='#000000')
-small_radio.grid(row=0, column=0)
+small_radio = tk.Radiobutton(level_frame, text="Small", variable=choice_var, value=1,bg='#828282' , fg='#000000')
+normal_radio = tk.Radiobutton(level_frame, text="Normal", variable=choice_var, value=2, bg='#828282', fg='#000000')
+medium_radio = tk.Radiobutton(level_frame, text="Medium", variable=choice_var, value=3,bg='#828282', fg='#000000')
+best_radio = tk.Radiobutton(level_frame, text="Best", variable=choice_var, value=4,bg='#828282' , fg='#000000')
+small_radio.grid(row=0,column=0)
 normal_radio.grid(row=0, column=1)
 medium_radio.grid(row=0, column=2)
 best_radio.grid(row=0, column=3)
 
-# Button Frame
-b_frame =tk.LabelFrame(frame, bg='#828282', fg='#000000')
-b_frame.grid(row= 2, column=0, padx=20, pady=10,sticky='ew')
-
-fb_button=tk.Button(b_frame, text="Give Feedback", command=open_form, bg='#828282', fg='#000000')
-fb_button.grid(row=0,column=0,padx=10,pady=5,sticky='e')
-
-gen_button = tk.Button(b_frame, text="Generate", command=generate_sketch, bg='#828282', fg='#000000', width=10)
-gen_button.grid(row=0,column=3,padx=10,pady=5, sticky='w')
-
-b_frame.grid_columnconfigure(2, weight=1)
+button = tk.Button(root, text="Generate", command=generate_sketch, width=10,bg='#828282', fg='#000000')
+button.pack(padx=10, pady=10)
 
 root.mainloop()
