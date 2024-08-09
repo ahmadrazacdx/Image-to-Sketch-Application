@@ -4,9 +4,12 @@ import cv2
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
+
+
 def is_valid_image_extension(filename):
     valid_extensions = ['.jpg', '.jpeg', '.png']
     return any(filename.lower().endswith(ext) for ext in valid_extensions)
+    
 def get_input_image_path():
     file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg;*.jpeg;*.png")])
     if file_path and is_valid_image_extension(file_path):
@@ -14,11 +17,13 @@ def get_input_image_path():
         input_path_entry.insert(0, file_path)
     else:
         messagebox.showerror("Error", "Invalid image file selected!")
+        
 def get_output_folder():
     folder_path = filedialog.askdirectory()
     if folder_path:
         output_path_entry.delete(0, tk.END)
         output_path_entry.insert(0, folder_path)
+        
 def pencil_sketch(input_image_path, output_folder_path, kernel_size=(11, 11), sigma=0):
     try:
         image = cv2.imread(input_image_path)
@@ -45,6 +50,7 @@ def pencil_sketch(input_image_path, output_folder_path, kernel_size=(11, 11), si
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
+        
 def generate_sketch():
     input_image_path = input_path_entry.get()
     output_sketch_path = output_path_entry.get()
